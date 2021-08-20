@@ -102,21 +102,17 @@ def kernNgram(ngrams1,ngrams2):
 
 fn = "./input/beethoven.mid" if len(sys.argv)!=2 else sys.argv[1]
 
-def forecastPart(fn=fn,p=0,Nforecast=20,Ndim=3,Nseq=8,Nlen=50,maxlags=6):
-    pitches,durations,volumes,isPauses = parseMidi(fn,part=p)
-    zz = zip(pitches,durations,volumes,isPauses)
-    print(len(zz))
-    M = matrix([[1]])
-    c = Nseq+1
-    while M.is_positive_definite() and Nlen>c:
-        #Nseq += 1
-        c+=1
-        Z = ngrams([t for t in zz[0:c]],Nseq)
-        print(len(Z))
-        M = matrix([[ kernNgram(t1,t2) for t1 in Z] for t2 in Z],ring=RDF)
-    c-=1
-    Z = ngrams([t for t in zz[0:c]],Nseq)
+def forecastPart(fn=fn,voice=1,Nforecast=20,Nmaxlen=100,Ndim=3,Nseq=8,maxlags=6,nCopy=4):
+    pitches,durations,volumes,isPauses = parseMidi(fn,part=voice)
+    zz = list(zip(pitches,durations,volumes,isPauses))
+    print(len((zz)))
+    #M = matrix([[1]])
+    Nlen = len(zz)
+    
+    Z = ngrams([t for t in zz[0:Nmaxlen]],Nseq)
     M = matrix([[kernNgram(t1,t2) for t1 in Z] for t2 in Z],ring=RDF)
+    if not M.is_positive_definite():
+        M+= matrix.identity(len(Z))*0.1
 
 #print(qq)
 #M = matrix([[kern(k1,k2) for k1 in range(88)] for k2 in range(88)])
@@ -172,7 +168,8 @@ def forecastPart(fn=fn,p=0,Nforecast=20,Ndim=3,Nseq=8,Nlen=50,maxlags=6):
     inds = []
     for x in preds:
         i = findBestMatch(nbrs,x)
-        inds.extend(Z[i][0:3])
+        lz = len(Z[i])//2
+        inds.extend(Z[i][(lz-nCopy):(lz+nCopy)])
 
     return(inds)
 
@@ -216,7 +213,7 @@ def writePitches(fn,inds,tempo=82):
             pitch,duration,volume,isPause = inds[k][i]
             track = k
             channel = k
-            duration = findNearestDuration(duration*12*4)
+            duration = duration*12*4 #findNearestDuration(duration*12*4)
             #print(k,pitch,times[k],duration,100)
             if not isPause: #rest
                 #print(volumes[i])
@@ -233,9 +230,10 @@ def writePitches(fn,inds,tempo=82):
 pps = [0,1]
 iinds = []
 for p in pps:
-    inds = forecastPart(fn,p=p,Nlen=30,Nforecast=60,Ndim=2,Nseq=8,maxlags=3)
+    inds = forecastPart(fn,voice=p,Nforecast=80+(1-p)*120,Nmaxlen=200,Ndim=4,Nseq=18,maxlags=5,nCopy=1)
+    print(inds)
     iinds.append(inds)
-writePitches(fn+".mix.mid",iinds,tempo=72)    
+writePitches(fn+".mix.mid",iinds,tempo=120,instrument=[0,0]) #[71,42])    
 
 
 
