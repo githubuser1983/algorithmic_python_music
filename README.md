@@ -4,7 +4,7 @@ Here you can find some postprocessing of known melodies which I did with an algo
 
 
 
-https://soundcloud.com/user-919775337/sets/album140821
+https://soundcloud.com/user-919775337/sets/algorithmic-reinterpretation
 
 
 
