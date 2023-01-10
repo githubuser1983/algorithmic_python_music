@@ -1,0 +1,3 @@
+In base two the sum of Euler number e and pi is given by e+pi=101.110111000010000010111... 
+I use these digits to create this multipart piece for piano:
+https://www.youtube.com/watch?v=kgbzX9Rbv6M
