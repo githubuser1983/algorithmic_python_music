@@ -13,5 +13,5 @@ digits are converted to left or right movements on a list of pitches, which crea
 bandcamp: 
 youtube:  https://www.youtube.com/watch?v=RdCDsSfe2_E
 
-If you happen to take part in this challenge: Tage your music with #InfinitePiChallenge.
+If you happen to take part in this challenge: Tag your music with #InfinitePiChallenge.
 
