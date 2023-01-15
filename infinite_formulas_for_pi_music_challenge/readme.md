@@ -10,8 +10,10 @@ My challenge is this: Can you interpret each formula as a musical piece?
 Here you can find one interpretation of a very simple formula. For each part of the piece a better rational approximation of Pi is computed and its binary
 digits are converted to left or right movements on a list of pitches, which creates the piece:
 
-bandcamp: 
+bandcamp: https://musescore1983.bandcamp.com/track/infinite-formulas-for-pi-music-challenge
+
 youtube:  https://www.youtube.com/watch?v=RdCDsSfe2_E
+
 
 If you happen to take part in this challenge: Tag your music with #InfinitePiChallenge.
 
