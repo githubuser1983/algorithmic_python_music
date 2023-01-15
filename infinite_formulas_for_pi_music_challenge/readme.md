@@ -1,6 +1,6 @@
 Infinite formulas for Pi - Music challenge:
 
-One year ago or so, I stumbled upon an infinte number of formulas for pi:
+One year ago or so, I stumbled upon an infinite number of formulas for pi:
 
 https://math.stackexchange.com/questions/4350394/formulas-for-pi-of-the-form-2-sum-k-0-infty-binom2kk-fraca2k1b
 
